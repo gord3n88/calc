@@ -2,41 +2,29 @@ import java.util.Scanner;
 
 public class Calculator {
     public static void main(String[] args) {
+
         Scanner scanner = new Scanner(System.in);
         System.out.print("Введите выражение: ");
         String expression = scanner.nextLine();
-
         String[] elements = expression.split(" ");
 
-        if (elements.length != 3) {
-            System.out.println("Некорректное выражение");
-            return;
-        }
+        if (elements.length != 3) throw new IllegalArgumentException("Некорректное выражение");
 
-        double num1 = Double.parseDouble(elements[0]);
-        double num2 = Double.parseDouble(elements[2]);
+        int num1 = Integer.parseInt(elements[0]);
+        int num2 = Integer.parseInt(elements[2]);
         String operator = elements[1];
+        int result;
 
-        double result;
-
-        switch (operator) {
-            case "+":
-                result = num1 + num2;
-                break;
-            case "-":
-                result = num1 - num2;
-                break;
-            case "*":
-                result = num1 * num2;
-                break;
-            case "/":
-                result = num1 / num2;
-                break;
-            default:
-                System.out.println("Некорректный оператор");
-                return;
+        if (num1 > 0 && num1 <=10 && num2 > 0 && num2 <=10) {
+            switch (operator) {
+                case "+" -> result = num1 + num2;
+                case "-" -> result = num1 - num2;
+                case "*" -> result = num1 * num2;
+                case "/" -> result = num1 / num2;
+                default -> throw new IllegalArgumentException("Некорректный оператор");
+            }
+            System.out.println("Результат: " + result);
         }
-
-        System.out.println("Результат: " + result);
+        else throw new IllegalArgumentException("Принимаемые значения должны быть от 1 до 10 включительно");
     }
 }
